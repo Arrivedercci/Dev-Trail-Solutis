@@ -1,0 +1,14 @@
+/home/xuco/Programas/BancoCharpLibs/obj/Debug/net8.0/BancoCharpLibs.GeneratedMSBuildEditorConfig.editorconfig
+/home/xuco/Programas/BancoCharpLibs/obj/Debug/net8.0/BancoCharpLibs.AssemblyInfoInputs.cache
+/home/xuco/Programas/BancoCharpLibs/obj/Debug/net8.0/BancoCharpLibs.AssemblyInfo.cs
+/home/xuco/Programas/BancoCharpLibs/obj/Debug/net8.0/BancoCharpLibs.csproj.CoreCompileInputs.cache
+/home/xuco/Programas/BancoCharpLibs/bin/Debug/net8.0/BancoCharpLibs
+/home/xuco/Programas/BancoCharpLibs/bin/Debug/net8.0/BancoCharpLibs.deps.json
+/home/xuco/Programas/BancoCharpLibs/bin/Debug/net8.0/BancoCharpLibs.runtimeconfig.json
+/home/xuco/Programas/BancoCharpLibs/bin/Debug/net8.0/BancoCharpLibs.dll
+/home/xuco/Programas/BancoCharpLibs/bin/Debug/net8.0/BancoCharpLibs.pdb
+/home/xuco/Programas/BancoCharpLibs/obj/Debug/net8.0/BancoCharpLibs.dll
+/home/xuco/Programas/BancoCharpLibs/obj/Debug/net8.0/refint/BancoCharpLibs.dll
+/home/xuco/Programas/BancoCharpLibs/obj/Debug/net8.0/BancoCharpLibs.pdb
+/home/xuco/Programas/BancoCharpLibs/obj/Debug/net8.0/BancoCharpLibs.genruntimeconfig.cache
+/home/xuco/Programas/BancoCharpLibs/obj/Debug/net8.0/ref/BancoCharpLibs.dll

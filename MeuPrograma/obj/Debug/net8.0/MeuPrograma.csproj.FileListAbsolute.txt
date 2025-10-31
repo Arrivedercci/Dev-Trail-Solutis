@@ -1,0 +1,14 @@
+/home/xuco/MeuPrograma/obj/Debug/net8.0/MeuPrograma.GeneratedMSBuildEditorConfig.editorconfig
+/home/xuco/MeuPrograma/obj/Debug/net8.0/MeuPrograma.AssemblyInfoInputs.cache
+/home/xuco/MeuPrograma/obj/Debug/net8.0/MeuPrograma.AssemblyInfo.cs
+/home/xuco/MeuPrograma/obj/Debug/net8.0/MeuPrograma.csproj.CoreCompileInputs.cache
+/home/xuco/MeuPrograma/bin/Debug/net8.0/MeuPrograma
+/home/xuco/MeuPrograma/bin/Debug/net8.0/MeuPrograma.deps.json
+/home/xuco/MeuPrograma/bin/Debug/net8.0/MeuPrograma.runtimeconfig.json
+/home/xuco/MeuPrograma/bin/Debug/net8.0/MeuPrograma.dll
+/home/xuco/MeuPrograma/bin/Debug/net8.0/MeuPrograma.pdb
+/home/xuco/MeuPrograma/obj/Debug/net8.0/MeuPrograma.dll
+/home/xuco/MeuPrograma/obj/Debug/net8.0/refint/MeuPrograma.dll
+/home/xuco/MeuPrograma/obj/Debug/net8.0/MeuPrograma.pdb
+/home/xuco/MeuPrograma/obj/Debug/net8.0/MeuPrograma.genruntimeconfig.cache
+/home/xuco/MeuPrograma/obj/Debug/net8.0/ref/MeuPrograma.dll
