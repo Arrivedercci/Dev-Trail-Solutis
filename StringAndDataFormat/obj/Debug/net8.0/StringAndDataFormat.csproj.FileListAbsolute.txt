@@ -1,0 +1,14 @@
+/home/xuco/Programas/StringAndDataFormat/bin/Debug/net8.0/StringAndDataFormat
+/home/xuco/Programas/StringAndDataFormat/bin/Debug/net8.0/StringAndDataFormat.deps.json
+/home/xuco/Programas/StringAndDataFormat/bin/Debug/net8.0/StringAndDataFormat.runtimeconfig.json
+/home/xuco/Programas/StringAndDataFormat/bin/Debug/net8.0/StringAndDataFormat.dll
+/home/xuco/Programas/StringAndDataFormat/bin/Debug/net8.0/StringAndDataFormat.pdb
+/home/xuco/Programas/StringAndDataFormat/obj/Debug/net8.0/StringAndDataFormat.GeneratedMSBuildEditorConfig.editorconfig
+/home/xuco/Programas/StringAndDataFormat/obj/Debug/net8.0/StringAndDataFormat.AssemblyInfoInputs.cache
+/home/xuco/Programas/StringAndDataFormat/obj/Debug/net8.0/StringAndDataFormat.AssemblyInfo.cs
+/home/xuco/Programas/StringAndDataFormat/obj/Debug/net8.0/StringAndDataFormat.csproj.CoreCompileInputs.cache
+/home/xuco/Programas/StringAndDataFormat/obj/Debug/net8.0/StringAndDataFormat.dll
+/home/xuco/Programas/StringAndDataFormat/obj/Debug/net8.0/refint/StringAndDataFormat.dll
+/home/xuco/Programas/StringAndDataFormat/obj/Debug/net8.0/StringAndDataFormat.pdb
+/home/xuco/Programas/StringAndDataFormat/obj/Debug/net8.0/StringAndDataFormat.genruntimeconfig.cache
+/home/xuco/Programas/StringAndDataFormat/obj/Debug/net8.0/ref/StringAndDataFormat.dll
