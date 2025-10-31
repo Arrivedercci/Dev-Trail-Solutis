@@ -1,0 +1,30 @@
+﻿Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.5.2.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CollectionsLINQ", "CollectionsLINQ.csproj", "{7C00D3B0-04C0-1430-5B2E-4B193808CAA9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StringAndDataFormat", "..\StringAndDataFormat\StringAndDataFormat.csproj", "{5E7C7603-2C65-4E2A-906C-14AF80BA7DB3}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{7C00D3B0-04C0-1430-5B2E-4B193808CAA9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7C00D3B0-04C0-1430-5B2E-4B193808CAA9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7C00D3B0-04C0-1430-5B2E-4B193808CAA9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7C00D3B0-04C0-1430-5B2E-4B193808CAA9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5E7C7603-2C65-4E2A-906C-14AF80BA7DB3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5E7C7603-2C65-4E2A-906C-14AF80BA7DB3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5E7C7603-2C65-4E2A-906C-14AF80BA7DB3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5E7C7603-2C65-4E2A-906C-14AF80BA7DB3}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {FFCADD48-B818-4F0F-A270-668B45D32164}
+	EndGlobalSection
+EndGlobal

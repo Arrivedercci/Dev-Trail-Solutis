@@ -1,0 +1,14 @@
+/home/xuco/Programas/CollectionsLINQ/bin/Debug/net8.0/CollectionsLINQ
+/home/xuco/Programas/CollectionsLINQ/bin/Debug/net8.0/CollectionsLINQ.deps.json
+/home/xuco/Programas/CollectionsLINQ/bin/Debug/net8.0/CollectionsLINQ.runtimeconfig.json
+/home/xuco/Programas/CollectionsLINQ/bin/Debug/net8.0/CollectionsLINQ.dll
+/home/xuco/Programas/CollectionsLINQ/bin/Debug/net8.0/CollectionsLINQ.pdb
+/home/xuco/Programas/CollectionsLINQ/obj/Debug/net8.0/CollectionsLINQ.GeneratedMSBuildEditorConfig.editorconfig
+/home/xuco/Programas/CollectionsLINQ/obj/Debug/net8.0/CollectionsLINQ.AssemblyInfoInputs.cache
+/home/xuco/Programas/CollectionsLINQ/obj/Debug/net8.0/CollectionsLINQ.AssemblyInfo.cs
+/home/xuco/Programas/CollectionsLINQ/obj/Debug/net8.0/CollectionsLINQ.csproj.CoreCompileInputs.cache
+/home/xuco/Programas/CollectionsLINQ/obj/Debug/net8.0/CollectionsLINQ.dll
+/home/xuco/Programas/CollectionsLINQ/obj/Debug/net8.0/refint/CollectionsLINQ.dll
+/home/xuco/Programas/CollectionsLINQ/obj/Debug/net8.0/CollectionsLINQ.pdb
+/home/xuco/Programas/CollectionsLINQ/obj/Debug/net8.0/CollectionsLINQ.genruntimeconfig.cache
+/home/xuco/Programas/CollectionsLINQ/obj/Debug/net8.0/ref/CollectionsLINQ.dll

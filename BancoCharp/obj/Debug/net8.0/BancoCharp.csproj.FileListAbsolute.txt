@@ -1,0 +1,14 @@
+/home/xuco/Programas/BancoCharp/bin/Debug/net8.0/BancoCharp
+/home/xuco/Programas/BancoCharp/bin/Debug/net8.0/BancoCharp.deps.json
+/home/xuco/Programas/BancoCharp/bin/Debug/net8.0/BancoCharp.runtimeconfig.json
+/home/xuco/Programas/BancoCharp/bin/Debug/net8.0/BancoCharp.dll
+/home/xuco/Programas/BancoCharp/bin/Debug/net8.0/BancoCharp.pdb
+/home/xuco/Programas/BancoCharp/obj/Debug/net8.0/BancoCharp.GeneratedMSBuildEditorConfig.editorconfig
+/home/xuco/Programas/BancoCharp/obj/Debug/net8.0/BancoCharp.AssemblyInfoInputs.cache
+/home/xuco/Programas/BancoCharp/obj/Debug/net8.0/BancoCharp.AssemblyInfo.cs
+/home/xuco/Programas/BancoCharp/obj/Debug/net8.0/BancoCharp.csproj.CoreCompileInputs.cache
+/home/xuco/Programas/BancoCharp/obj/Debug/net8.0/BancoCharp.dll
+/home/xuco/Programas/BancoCharp/obj/Debug/net8.0/refint/BancoCharp.dll
+/home/xuco/Programas/BancoCharp/obj/Debug/net8.0/BancoCharp.pdb
+/home/xuco/Programas/BancoCharp/obj/Debug/net8.0/BancoCharp.genruntimeconfig.cache
+/home/xuco/Programas/BancoCharp/obj/Debug/net8.0/ref/BancoCharp.dll
