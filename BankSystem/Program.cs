@@ -1,4 +1,5 @@
-using BankSystem.Api.Repositories;
+using BankSystem.Data;
+using Microsoft.EntityFrameworkCore;
 
 public class Program
 {
@@ -8,22 +9,22 @@ public class Program
 
         var builder = WebApplication.CreateBuilder(args);
 
-        builder.Services.AddSingleton<IContaRepository, ContaRepository>();
         builder.Services.AddEndpointsApiExplorer();
         builder.Services.AddSwaggerGen();
 
-        // Add services to the container.
+        builder.Services.AddDbContext<BankContext>(
+            options => options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"))
+        );
 
         builder.Services.AddControllers();
 
         var app = builder.Build();
 
-        // Configure the HTTP request pipeline.
+
         if (app.Environment.IsDevelopment())
         {
             app.UseSwagger();
             app.UseSwaggerUI();
-            //app.MapOpenApi();
         }
 
         app.UseHttpsRedirection();
