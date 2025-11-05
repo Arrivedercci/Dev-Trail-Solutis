@@ -13,7 +13,7 @@ public class Program
         builder.Services.AddSwaggerGen();
 
         builder.Services.AddDbContext<BankContext>(
-            options => options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"))
+            options => options.UseSqlServer(builder.Configuration.GetConnectionString("BankSystem"))
         );
 
         builder.Services.AddControllers();
