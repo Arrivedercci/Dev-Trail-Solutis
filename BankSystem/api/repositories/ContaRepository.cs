@@ -1,5 +1,5 @@
 using System.Collections.Concurrent;
-using Api.Models.View;
+using Api.Dtos.View;
 
 namespace BankSystem.Api.Repositories
 {

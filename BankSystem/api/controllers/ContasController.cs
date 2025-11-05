@@ -1,6 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
-using Api.Models.Input;
-using Api.Models.View;
+using Api.Dtos.Input;
+using Api.Dtos.View;
 using BankSystem.Api.Repositories;
 
 namespace BankSystem.Api.Controllers

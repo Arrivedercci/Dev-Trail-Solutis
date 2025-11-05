@@ -1,6 +1,6 @@
 using System.ComponentModel.DataAnnotations;
 
-namespace Api.Models.Input
+namespace Api.Dtos.Input
 {
     public class ContaInput
     {

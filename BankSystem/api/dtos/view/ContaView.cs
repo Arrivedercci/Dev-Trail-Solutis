@@ -1,4 +1,4 @@
-namespace Api.Models.View
+namespace Api.Dtos.View
 {
     public class ContaView
     {
