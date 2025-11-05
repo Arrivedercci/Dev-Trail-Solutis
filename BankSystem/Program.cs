@@ -34,6 +34,23 @@ public class Program
 
         app.MapControllers();
 
+        app.MapGet("/health", async (BankContext context) =>
+        {
+
+            bool testeConexao = await context.Database.CanConnectAsync();
+
+            if (testeConexao)
+            {
+                return Results.Ok("Banco está Funcionando!");
+            }
+            else
+            {
+                return Results.BadRequest("Banco está Fora do Ar!");
+            }
+        });
+
         app.Run();
     }
+
+
 }
