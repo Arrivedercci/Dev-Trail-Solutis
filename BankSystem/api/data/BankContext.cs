@@ -16,7 +16,7 @@ public class BankContext : DbContext
         base.OnModelCreating(modelBuilder);
         modelBuilder.Entity<Conta>(entity =>
         {
-            entity.HasKey(e => e.id);
+            entity.HasKey(e => e.Id);
             entity.Property(e => e.NumeroConta).IsRequired().HasMaxLength(20);
             entity.Property(e => e.Saldo).IsRequired().HasColumnType("decimal(18,2)");
             entity.Property(e => e.Tipo).IsRequired();

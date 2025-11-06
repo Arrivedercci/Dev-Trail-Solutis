@@ -2,13 +2,19 @@ namespace Api.Dtos.View
 {
     public class ContaView
     {
-        public Guid NumeroConta { get; init; }
-        public string Titular { get; init; } = string.Empty;
-        public decimal Saldo { get; init; }
-        public string Tipo { get; init; } = string.Empty;
 
-        public override string ToString() =>
-            $"Conta: [{NumeroConta},{Titular},{Tipo}, Saldo:{Saldo}]";
+        public Guid Id { get; set; }
+
+        public int NumeroConta { get; set; }
+
+        public decimal Saldo { get; set; }
+
+        public Tipo Tipo { get; set; }
+
+
+        public DateTime DataCriacao { get; set; } = DateTime.Now;
+
+        public Status Status { get; set; }
 
     }
 }

@@ -1,7 +1,9 @@
 using Microsoft.AspNetCore.Mvc;
 using Api.Dtos.Input;
 using Api.Dtos.View;
-using BankSystem.Api.Repositories;
+using BankSystem.Data;
+using Api.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace BankSystem.Api.Controllers
 {
@@ -9,60 +11,86 @@ namespace BankSystem.Api.Controllers
     [Route("api/[controller]")]
     public class ContasController : ControllerBase
     {
+        private readonly BankContext _context;
 
-        private readonly ILogger<ContasController> _logger;
-        private readonly IContaRepository _repo;
-
-        public ContasController(ILogger<ContasController> logger, IContaRepository repo)
+        public ContasController(BankContext context)
         {
-            _logger = logger;
-            _repo = repo;
+            _context = context;
         }
 
         [HttpPost(Name = "CreateConta")]
-        public IActionResult Post([FromBody] ContaInput contaInput)
+        public async Task<IActionResult> Post([FromBody] ContaInput contaInput)
         {
             if (!ModelState.IsValid) return BadRequest(ModelState);
 
-            var view = new ContaView
+            var conta = new Conta
             {
-                NumeroConta = Guid.NewGuid(),
-                Titular = contaInput.Titular,
-                Saldo = contaInput.SaldoInicial,
-                Tipo = contaInput.Tipo
+                Id = Guid.NewGuid(),
+                NumeroConta = contaInput.NumeroConta,
+                Saldo = contaInput.Saldo,
+                Tipo = contaInput.Tipo,
+                DataCriacao = DateTime.UtcNow,
+                Status = contaInput.Status
+
             };
 
-            _repo.Add(view);
-            return CreatedAtAction(nameof(Get), new { id = view.NumeroConta }, view);
-        }
+            await _context.Contas.AddAsync(conta);
+            await _context.SaveChangesAsync();
 
+            var view = new ContaView
+            {
+                Id = conta.Id,
+                NumeroConta = conta.NumeroConta,
+                Saldo = conta.Saldo,
+                Tipo = conta.Tipo,
+                DataCriacao = conta.DataCriacao,
+                Status = conta.Status
+            };
+
+            return CreatedAtAction(nameof(Get), new { conta.NumeroConta }, view);
+        }
         [HttpGet(Name = "GetContas")]
-        public IActionResult Get()
+        public async Task<IActionResult> Get()
         {
-            _logger.LogInformation("Obtendo a lista de contas.");
-            return Ok(_repo.GetAll());
+            var list = await _context.Contas
+                .AsNoTracking()
+                .Select(e => new ContaView
+                {
+                    Id = e.Id,
+                    NumeroConta = e.NumeroConta,
+                    Saldo = e.Saldo,
+                    Tipo = e.Tipo,
+                    DataCriacao = e.DataCriacao,
+                    Status = e.Status
+                })
+                .ToListAsync();
+
+            return Ok(list);
         }
 
-        [HttpGet("{id:guid}", Name = "GetContaById")]
-        public IActionResult Get(Guid id)
+        [HttpGet("{NumeroConta:int}", Name = "GetContaByNumero")]
+        public async Task<IActionResult> Get(int NumeroConta)
         {
-            var conta = _repo.Get(id);
+            var conta = await _context.Contas.FindAsync(NumeroConta);
             if (conta is null) return NotFound();
-            return Ok(conta);
-        }
 
-        [HttpGet("{titular}", Name = "GetContaByTitular")]
-        public IActionResult Get(string titular)
-        {
-            var conta = _repo.GetAll().FirstOrDefault(c => c.Titular == titular);
-            if (conta is null) return NotFound();
-            return Ok(conta);
+            var view = new ContaView
+            {
+                Id = conta.Id,
+                NumeroConta = conta.NumeroConta,
+                Saldo = conta.Saldo,
+                Tipo = conta.Tipo,
+                DataCriacao = conta.DataCriacao,
+                Status = conta.Status
+            };
+
+            return Ok(view);
         }
 
         [HttpPut("{id:guid}", Name = "Trasacao")]
-        public IActionResult Put(Guid id, [FromBody] decimal valor, string transacao)
+        public async Task<IActionResult> Put(Guid id, [FromBody] decimal valor, string transacao)
         {
-            var conta = _repo.Get(id);
+            var conta = await _context.Contas.FindAsync(id);
             if (conta is null) return NotFound();
 
             if (valor <= 0m) return BadRequest("Valor deve ser maior que zero.");
@@ -73,26 +101,31 @@ namespace BankSystem.Api.Controllers
                 if (conta.Saldo < valor) return BadRequest("Saldo insuficiente.");
                 var updated = new ContaView
                 {
+                    Id = conta.Id,
                     NumeroConta = conta.NumeroConta,
-                    Titular = conta.Titular,
+                    Saldo = conta.Saldo - valor,
                     Tipo = conta.Tipo,
-                    Saldo = conta.Saldo - valor
+                    DataCriacao = conta.DataCriacao,
+                    Status = conta.Status
+
                 };
 
-                _repo.Update(updated);
+                _context.Update(updated);
                 return Ok(updated);
             }
             else if (string.Equals(transacao, "deposito", StringComparison.OrdinalIgnoreCase))
             {
                 var updated = new ContaView
                 {
+                    Id = conta.Id,
                     NumeroConta = conta.NumeroConta,
-                    Titular = conta.Titular,
+                    Saldo = conta.Saldo + valor,
                     Tipo = conta.Tipo,
-                    Saldo = conta.Saldo + valor
+                    DataCriacao = conta.DataCriacao,
+                    Status = conta.Status
                 };
 
-                _repo.Update(updated);
+                _context.Update(updated);
                 return Ok(updated);
             }
 
@@ -101,12 +134,13 @@ namespace BankSystem.Api.Controllers
 
 
         [HttpDelete("{id:guid}", Name = "DeleteConta")]
-        public IActionResult Delete(Guid id)
+        public async Task<IActionResult> Delete(Guid id)
         {
-            var conta = _repo.Get(id);
+            var conta = await _context.Contas.FindAsync(id);
             if (conta is null) return NotFound();
 
-            _repo.Delete(id);
+            _context.Contas.Remove(conta);
+            await _context.SaveChangesAsync();
             return NoContent();
         }
     }
