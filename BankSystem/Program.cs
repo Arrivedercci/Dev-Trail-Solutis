@@ -45,7 +45,7 @@ public class Program
             }
             else
             {
-                return Results.BadRequest("Banco está Fora do Ar!");
+                return Results.Problem("Banco está Fora do Ar!");
             }
         });
 

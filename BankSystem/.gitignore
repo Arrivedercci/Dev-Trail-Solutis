@@ -69,3 +69,4 @@ $RECYCLE.BIN/
 # Misc
 .vsconfig
 *.userprefs
+.fake
