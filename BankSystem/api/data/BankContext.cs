@@ -11,6 +11,8 @@ public class BankContext : DbContext
     }
 
     public DbSet<Conta> Contas { get; set; }
+    public DbSet<Cliente> Clientes { get; set; }
+
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         base.OnModelCreating(modelBuilder);
@@ -22,6 +24,18 @@ public class BankContext : DbContext
             entity.Property(e => e.Tipo).IsRequired();
             entity.Property(e => e.DataCriacao).IsRequired();
             entity.Property(e => e.Status).IsRequired();
+
+            entity.HasOne(c => c.Cliente)
+                  .WithMany(a => a.Contas)
+                  .HasForeignKey("ClienteId")
+                  .OnDelete(DeleteBehavior.Restrict);
+        });
+
+        modelBuilder.Entity<Cliente>(cliente =>
+        {
+            cliente.HasKey(c => c.Id);
+            cliente.Property(c => c.Nome).IsRequired().HasMaxLength(100);
+            cliente.Property(c => c.Cpf).IsRequired().HasMaxLength(11);
         });
     }
 }

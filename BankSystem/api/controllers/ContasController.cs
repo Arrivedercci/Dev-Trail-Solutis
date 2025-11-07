@@ -2,8 +2,9 @@ using Microsoft.AspNetCore.Mvc;
 using Api.Dtos.Input;
 using Api.Dtos.View;
 using BankSystem.Data;
-using Api.Models;
 using Microsoft.EntityFrameworkCore;
+using Api.Models;
+
 
 namespace BankSystem.Api.Controllers
 {
@@ -23,46 +24,33 @@ namespace BankSystem.Api.Controllers
         {
             if (!ModelState.IsValid) return BadRequest(ModelState);
 
-            var conta = new Conta
+            var cliente = await Cliente.GetClienteByCpf(_context, contaInput.CpfCliente);
+            if (cliente is null) cliente = new Cliente
             {
                 Id = Guid.NewGuid(),
-                NumeroConta = contaInput.NumeroConta,
-                Saldo = contaInput.Saldo,
-                Tipo = contaInput.Tipo,
-                DataCriacao = DateTime.UtcNow,
-                Status = contaInput.Status
+                Cpf = contaInput.CpfCliente,
+                Nome = contaInput.NomeCliente
 
             };
 
-            await _context.Contas.AddAsync(conta);
+            var conta = contaInput.toConta(contaInput, cliente);
+            cliente.Contas.Add(conta);
+            _context.Contas.Add(conta);
             await _context.SaveChangesAsync();
 
-            var view = new ContaView
-            {
-                Id = conta.Id,
-                NumeroConta = conta.NumeroConta,
-                Saldo = conta.Saldo,
-                Tipo = conta.Tipo,
-                DataCriacao = conta.DataCriacao,
-                Status = conta.Status
-            };
+            var view = ContaView.toContaView(conta);
 
             return CreatedAtAction(nameof(Get), new { conta.NumeroConta }, view);
         }
+
         [HttpGet(Name = "GetContas")]
         public async Task<IActionResult> Get()
         {
             var list = await _context.Contas
                 .AsNoTracking()
-                .Select(e => new ContaView
-                {
-                    Id = e.Id,
-                    NumeroConta = e.NumeroConta,
-                    Saldo = e.Saldo,
-                    Tipo = e.Tipo,
-                    DataCriacao = e.DataCriacao,
-                    Status = e.Status
-                })
+                .Include(c => c.Cliente)
+                .Select(e => ContaView
+                .toContaView(e, ClienteView.toClienteView(e.Cliente!)))
                 .ToListAsync();
 
             return Ok(list);
@@ -71,18 +59,10 @@ namespace BankSystem.Api.Controllers
         [HttpGet("{NumeroConta:int}", Name = "GetContaByNumero")]
         public async Task<IActionResult> Get(int NumeroConta)
         {
-            var conta = await _context.Contas.FirstOrDefaultAsync(c => c.NumeroConta == NumeroConta);
+            var conta = await _context.Contas.Include(c => c.Cliente).FirstOrDefaultAsync(c => c.NumeroConta == NumeroConta);
             if (conta is null) return NotFound();
 
-            var view = new ContaView
-            {
-                Id = conta.Id,
-                NumeroConta = conta.NumeroConta,
-                Saldo = conta.Saldo,
-                Tipo = conta.Tipo,
-                DataCriacao = conta.DataCriacao,
-                Status = conta.Status
-            };
+            var view = ContaView.toContaView(conta, ClienteView.toClienteView(conta.Cliente!));
 
             return Ok(view);
         }
