@@ -71,7 +71,7 @@ namespace BankSystem.Api.Controllers
         [HttpGet("{NumeroConta:int}", Name = "GetContaByNumero")]
         public async Task<IActionResult> Get(int NumeroConta)
         {
-            var conta = await _context.Contas.FindAsync(NumeroConta);
+            var conta = await _context.Contas.FirstOrDefaultAsync(c => c.NumeroConta == NumeroConta);
             if (conta is null) return NotFound();
 
             var view = new ContaView
