@@ -25,4 +25,8 @@ public class Conta
     [Required]
     public Status Status { get; set; }
 
+    public Cliente? Cliente { get; set; }
+
+    public Guid ClienteId { get; set; }
+
 }
