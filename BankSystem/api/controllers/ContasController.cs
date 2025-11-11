@@ -26,13 +26,11 @@ namespace BankSystem.Api.Controllers
             var contas = await _contaService.GetAllContasAsync();
             return Ok(contas);
         }
-
-        [HttpGet("{NumeroConta:int}", Name = "GetContaByNumero")]
-        public async Task<IActionResult> Get(int numeroConta)
+        [HttpGet("{numeroConta:int}", Name = "GetContaByNumero")]
+        public async Task<IActionResult> GetContaByNumero(int numeroConta)
         {
             var conta = await _contaService.GetContaByNumeroAsync(numeroConta);
             if (conta is null) return NotFound();
-
             return Ok(conta);
         }
 
