@@ -1,126 +1,70 @@
 using Microsoft.AspNetCore.Mvc;
 using Api.Dtos.Input;
-using Api.Dtos.View;
-using BankSystem.Data;
-using Microsoft.EntityFrameworkCore;
-using Api.Models;
+using BankSystem.Api.Repositories;
+using Api.Services;
 
 
 namespace BankSystem.Api.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
-    public class ContasController : ControllerBase
+    public class ContasController(IContaService _contaService) : ControllerBase
     {
-        private readonly BankContext _context;
-
-        public ContasController(BankContext context)
-        {
-            _context = context;
-        }
 
         [HttpPost(Name = "CreateConta")]
-        public async Task<IActionResult> Post([FromBody] ContaInput contaInput)
+        public async Task<IActionResult> CriarConta([FromBody] ContaInput contaInput)
         {
             if (!ModelState.IsValid) return BadRequest(ModelState);
+            var view = await _contaService.AddContaAsync(contaInput);
 
-            var cliente = await Cliente.GetClienteByCpf(_context, contaInput.CpfCliente);
-            if (cliente is null) cliente = new Cliente
-            {
-                Id = Guid.NewGuid(),
-                Cpf = contaInput.CpfCliente,
-                Nome = contaInput.NomeCliente
-
-            };
-
-            var conta = contaInput.toConta(contaInput, cliente);
-            cliente.Contas.Add(conta);
-            _context.Contas.Add(conta);
-            await _context.SaveChangesAsync();
-
-            var view = ContaView.toContaView(conta);
-
-            return CreatedAtAction(nameof(Get), new { conta.NumeroConta }, view);
+            return CreatedAtRoute("GetContaByNumero", new { numeroConta = view!.NumeroConta }, view);
         }
 
         [HttpGet(Name = "GetContas")]
-        public async Task<IActionResult> Get()
+        public async Task<IActionResult> GetConta()
         {
-            var list = await _context.Contas
-                .AsNoTracking()
-                .Include(c => c.Cliente)
-                .Select(e => ContaView
-                .toContaView(e, ClienteView.toClienteView(e.Cliente!)))
-                .ToListAsync();
-
-            return Ok(list);
+            var contas = await _contaService.GetAllContasAsync();
+            return Ok(contas);
         }
 
         [HttpGet("{NumeroConta:int}", Name = "GetContaByNumero")]
-        public async Task<IActionResult> Get(int NumeroConta)
+        public async Task<IActionResult> Get(int numeroConta)
         {
-            var conta = await _context.Contas.Include(c => c.Cliente).FirstOrDefaultAsync(c => c.NumeroConta == NumeroConta);
+            var conta = await _contaService.GetContaByNumeroAsync(numeroConta);
             if (conta is null) return NotFound();
 
-            var view = ContaView.toContaView(conta, ClienteView.toClienteView(conta.Cliente!));
-
-            return Ok(view);
+            return Ok(conta);
         }
 
-        [HttpPut("{id:guid}", Name = "Trasacao")]
-        public async Task<IActionResult> Put(Guid id, [FromBody] decimal valor, string transacao)
+        [HttpPatch("{id:guid}/deposito", Name = "Deposito")]
+        public async Task<IActionResult> Depositar(Guid id, [FromBody] decimal valor)
         {
-            var conta = await _context.Contas.FindAsync(id);
+            var resultado = await _contaService.DepositarAsync(id, valor);
+            if (!resultado) return NotFound();
+
+            var conta = await _contaService.GetContaByIdAsync(id);
             if (conta is null) return NotFound();
+            return Ok(conta);
 
-            if (valor <= 0m) return BadRequest("Valor deve ser maior que zero.");
-            if (string.IsNullOrWhiteSpace(transacao)) return BadRequest("Tipo de transação obrigatório.");
-
-            if (string.Equals(transacao, "saque", StringComparison.OrdinalIgnoreCase))
-            {
-                if (conta.Saldo < valor) return BadRequest("Saldo insuficiente.");
-                var updated = new ContaView
-                {
-                    Id = conta.Id,
-                    NumeroConta = conta.NumeroConta,
-                    Saldo = conta.Saldo - valor,
-                    Tipo = conta.Tipo,
-                    DataCriacao = conta.DataCriacao,
-                    Status = conta.Status
-
-                };
-
-                _context.Update(updated);
-                return Ok(updated);
-            }
-            else if (string.Equals(transacao, "deposito", StringComparison.OrdinalIgnoreCase))
-            {
-                var updated = new ContaView
-                {
-                    Id = conta.Id,
-                    NumeroConta = conta.NumeroConta,
-                    Saldo = conta.Saldo + valor,
-                    Tipo = conta.Tipo,
-                    DataCriacao = conta.DataCriacao,
-                    Status = conta.Status
-                };
-
-                _context.Update(updated);
-                return Ok(updated);
-            }
-
-            return BadRequest("Tipo de transação inválido. Use 'saque' ou 'deposito'.");
         }
 
+        [HttpPatch("{id:guid}/saque", Name = "Saque")]
+        public async Task<IActionResult> Sacar(Guid id, [FromBody] decimal valor)
+        {
+            var resultado = await _contaService.SacarAsync(id, valor);
+            if (!resultado) return NotFound();
+
+            var conta = await _contaService.GetContaByIdAsync(id);
+            if (conta is null) return NotFound();
+            return Ok(conta);
+        }
 
         [HttpDelete("{id:guid}", Name = "DeleteConta")]
-        public async Task<IActionResult> Delete(Guid id)
+        public async Task<IActionResult> Deletar(Guid id)
         {
-            var conta = await _context.Contas.FindAsync(id);
-            if (conta is null) return NotFound();
+            var result = await _contaService.DeleteContaAsync(id);
+            if (!result) return NotFound();
 
-            _context.Contas.Remove(conta);
-            await _context.SaveChangesAsync();
             return NoContent();
         }
     }

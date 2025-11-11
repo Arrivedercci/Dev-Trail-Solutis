@@ -1,0 +1,11 @@
+{
+  "version": 2,
+  "dgSpecHash": "iRe8hEASDFQ=",
+  "success": true,
+  "projectFilePath": "D:\\Programas\\Dev-Trail-Solutis\\LifeCycle\\LifeCycle.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\Yuri\\.nuget\\packages\\microsoft.aspnetcore.openapi\\9.0.10\\microsoft.aspnetcore.openapi.9.0.10.nupkg.sha512",
+    "C:\\Users\\Yuri\\.nuget\\packages\\microsoft.openapi\\1.6.17\\microsoft.openapi.1.6.17.nupkg.sha512"
+  ],
+  "logs": []
+}

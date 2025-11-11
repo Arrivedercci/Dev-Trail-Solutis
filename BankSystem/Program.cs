@@ -1,3 +1,5 @@
+using Api.Services;
+using BankSystem.Api.Repositories;
 using BankSystem.Data;
 using Microsoft.EntityFrameworkCore;
 
@@ -15,6 +17,11 @@ public class Program
         builder.Services.AddDbContext<BankContext>(
             options => options.UseSqlServer(builder.Configuration.GetConnectionString("BankSystem"))
         );
+
+        builder.Services.AddScoped<IContaRepository, ContaRepository>();
+        builder.Services.AddScoped<IContaService, ContaService>();
+        builder.Services.AddScoped<IClienteService, ClienteService>();
+        builder.Services.AddScoped<IClienteRepository, ClienteRepository>();
 
         builder.Services.AddControllers();
 

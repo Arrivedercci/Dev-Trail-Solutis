@@ -1,5 +1,6 @@
 using Api.Dtos.View;
 using Api.Models;
+using Api.Services;
 using BankSystem.Data;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -8,35 +9,23 @@ namespace BankSystem.Api.Controllers;
 
 [ApiController]
 [Route("api/[controller]")]
-public class ClienteController : ControllerBase
+public class ClienteController(IClienteService _clienteService) : ControllerBase
 {
-    private readonly BankContext _context;
-
-    public ClienteController(BankContext context)
-    {
-        _context = context;
-    }
-
     [HttpPost(Name = "CreateCliente")]
     public async Task<IActionResult> Post([FromBody] Cliente cliente)
     {
         if (!ModelState.IsValid) return BadRequest(ModelState);
-
-        await _context.Clientes.AddAsync(cliente);
-        await _context.SaveChangesAsync();
+        await _clienteService.CreateClienteAsync(cliente);
         return CreatedAtAction(nameof(GetByCPF), new { cpf = cliente.Cpf }, cliente);
     }
 
     [HttpGet("{cpf}", Name = "GetClienteByCPF")]
     public async Task<IActionResult> GetByCPF(string cpf)
     {
-        var cliente = await _context.Clientes.FirstOrDefaultAsync(c => c.Cpf == cpf);
-        if (cliente is null) return NotFound();
+        var clienteView = await _clienteService.GetClienteByCpfAsync(cpf);
+        if (clienteView == null) return NotFound();
 
-        var contas = Cliente.GetClienteByCpf(_context, cpf).Result?.Contas ?? new List<Conta>();
-        var view = ClienteView.toClienteView(cliente, contas);
-
-        return Ok(view);
+        return Ok(clienteView);
     }
 
 }

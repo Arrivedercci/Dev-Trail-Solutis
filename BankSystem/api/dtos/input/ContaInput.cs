@@ -23,16 +23,16 @@ namespace Api.Dtos.Input
 
 
 
-        public Conta toConta(ContaInput input, Cliente cliente)
+        public Conta toConta(Cliente cliente)
         {
             return new Conta
             {
                 Id = Guid.NewGuid(),
-                NumeroConta = input.NumeroConta,
-                Saldo = input.Saldo,
-                Tipo = input.Tipo,
-                DataCriacao = input.DataCriacao,
-                Status = input.Status,
+                NumeroConta = NumeroConta,
+                Saldo = Saldo,
+                Tipo = Tipo,
+                DataCriacao = DataCriacao,
+                Status = Status,
                 ClienteId = cliente.Id,
                 Cliente = cliente
             };

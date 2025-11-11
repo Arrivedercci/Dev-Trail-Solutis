@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("BancoCharp")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+5181a62742b3af0ef91f4c4354016db4395ff9a7")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+97a36ed41634510a482dd3b91989f5e1e06585bf")]
 [assembly: System.Reflection.AssemblyProductAttribute("BancoCharp")]
 [assembly: System.Reflection.AssemblyTitleAttribute("BancoCharp")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

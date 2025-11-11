@@ -13,21 +13,6 @@ namespace Api.Models
 
         public Cliente()
         {
-
-        }
-
-        public static async Task<Cliente?> GetClienteByCpf(BankContext context, string cpf)
-        {
-            if (string.IsNullOrWhiteSpace(cpf)) return null;
-
-            return await context.Clientes.Include(c => c.Contas).FirstOrDefaultAsync(c => c.Cpf == cpf);
-        }
-
-        public static async Task<Cliente?> GetClienteById(BankContext context, Guid id)
-        {
-            if (id == Guid.Empty) return null;
-
-            return await context.Clientes.Include(c => c.Contas).FirstOrDefaultAsync(c => c.Id == id);
         }
     }
 }
