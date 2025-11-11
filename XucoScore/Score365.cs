@@ -1,8 +1,8 @@
 using System;
 
-public class XucoScore : IObserver
+public class Score365 : IObserver
 {
-    public string Nome { get; set; } = "XucoScore";
+    public string Nome { get; set; } = "365Score";
 
     public void ReceberNotificacao(object? sender, GolEventArgs e)
     {
