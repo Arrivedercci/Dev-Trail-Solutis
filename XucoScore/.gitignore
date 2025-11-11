@@ -1,0 +1,72 @@
+# Visual Studio / .NET
+.vs/
+.vscode/
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+
+# Build outputs
+[Bb]in/
+[Oo]bj/
+out/
+artifacts/
+publish/
+
+# NuGet
+packages/
+*.nupkg
+project.lock.json
+project.fragment.lock.json
+
+# Rider / JetBrains
+.idea/
+*.DotSettings.user
+
+# ReSharper
+_ReSharper*/
+*.DotSettings.user
+
+# Test results / coverage
+TestResults/
+coverage/
+*.coverage
+*.coveragexml
+*.trx
+
+# Logs
+*.log
+logs/
+
+# Database files
+*.mdf
+*.ldf
+*.sqlite
+*.db
+*.db-journal
+
+# Local appsettings / secrets
+appsettings.*.Development.json
+appsettings.*.Local.json
+secrets.json
+secrets.*
+
+# Docker / compose
+docker-compose.override.yml
+.env
+.env.local
+**/Dockerfile.debug
+**/docker-compose*.yml
+
+# SQL Server docker volume (if you use a local folder)
+sqlserver_data/
+
+# OS generated files
+Thumbs.db
+Desktop.ini
+$RECYCLE.BIN/
+
+# Misc
+.vsconfig
+*.userprefs
+.fake
