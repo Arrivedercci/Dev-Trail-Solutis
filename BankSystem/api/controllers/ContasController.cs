@@ -21,7 +21,7 @@ namespace BankSystem.Api.Controllers
         }
 
         [HttpGet(Name = "GetContas")]
-        public async Task<IActionResult> GetConta()
+        public async Task<IActionResult> GetContas()
         {
             var contas = await _contaService.GetAllContasAsync();
             return Ok(contas);
@@ -38,11 +38,13 @@ namespace BankSystem.Api.Controllers
         [HttpPatch("{id:guid}/deposito", Name = "Deposito")]
         public async Task<IActionResult> Depositar(Guid id, [FromBody] decimal valor)
         {
-            var resultado = await _contaService.DepositarAsync(id, valor);
-            if (!resultado) return NotFound();
-
             var conta = await _contaService.GetContaByIdAsync(id);
             if (conta is null) return NotFound();
+
+            var resultado = await _contaService.DepositarAsync(id, valor);
+            if (!resultado) return BadRequest();
+
+
             return Ok(conta);
 
         }
@@ -50,11 +52,12 @@ namespace BankSystem.Api.Controllers
         [HttpPatch("{id:guid}/saque", Name = "Saque")]
         public async Task<IActionResult> Sacar(Guid id, [FromBody] decimal valor)
         {
-            var resultado = await _contaService.SacarAsync(id, valor);
-            if (!resultado) return NotFound();
-
             var conta = await _contaService.GetContaByIdAsync(id);
             if (conta is null) return NotFound();
+
+            var resultado = await _contaService.SacarAsync(id, valor);
+            if (!resultado) return BadRequest();
+
             return Ok(conta);
         }
 
