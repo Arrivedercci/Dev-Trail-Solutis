@@ -27,6 +27,7 @@ namespace Api.Services
         public async Task<IEnumerable<ContaView>> GetAllContasAsync()
         {
             var contas = await _contaRepository.GetAllContasAsync();
+            if(contas is null) contas = new List<Conta>();
             var views = contas.Select(c => ContaView.toContaView(c!));
             return views;
         }
